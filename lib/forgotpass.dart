@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rental_application/Login.dart';
-import 'package:rental_application/Resetpass.dart';
 import 'package:rental_application/verification.dart';
 
 class forpass extends StatelessWidget {

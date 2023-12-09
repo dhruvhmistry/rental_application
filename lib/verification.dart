@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
-import 'package:rental_application/Home.dart';
-import 'package:rental_application/Resetpass.dart';
-import 'package:rental_application/forgotpass.dart';
 import 'package:rental_application/mycontroller.dart';
 
 class otpver extends StatelessWidget {

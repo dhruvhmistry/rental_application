@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:rental_application/Home.dart';
 import 'package:rental_application/verification.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class authcontroller extends GetxController {
   RxString varid = "".obs;
-  phoneverification(contrycode, mobilenumber) async {
+  phoneverification(contrycode, mobilenumber, context) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: "${contrycode + mobilenumber}",
       verificationCompleted: (PhoneAuthCredential credential) {},
@@ -23,7 +23,9 @@ class authcontroller extends GetxController {
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
-    Get.to(() => otpver());
+    //Get.to(() => otpver());
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context) => otpver()), (route) => false);
   }
 
   RxString otp = ''.obs;
@@ -35,6 +37,9 @@ class authcontroller extends GetxController {
           verificationId: varid.value, smsCode: code);
 
       await auth.signInWithCredential(credential);
+
+      final sp = await SharedPreferences.getInstance();
+      sp.setBool('login', true);
 
       Get.to(() => Home());
     } catch (e) {
